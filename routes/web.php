@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KategoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+
+Route::get('/kategori', [KategoriController::class, 'index']);
+Route::get('/kategori/form/{method}/{id?}', [KategoriController::class, 'formView']);
+Route::post('/kategori/form/submit/{method}/{id?}', [KategoriController::class, 'formSubmit']);
+Route::get('/kategori/view/{id}', [KategoriController::class, 'singleView']);
+Route::get('/kategori/delete/{id}', [KategoriController::class, 'delete']);
+Route::get('/kategori/pdf/{id}', [KategoriController::class, 'downloadPdf']);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/master-items', [App\Http\Controllers\MasterItemsController::class, 'index']);
@@ -28,6 +38,6 @@ Route::post('/master-items/form/{method}/{id?}', [App\Http\Controllers\MasterIte
 
 Route::get('/master-items/view/{kode}', [App\Http\Controllers\MasterItemsController::class, 'singleView']);
 Route::get('/master-items/delete/{id}', [App\Http\Controllers\MasterItemsController::class, 'delete']);
-
+Route::get('/master-items/export-excel', [App\Http\Controllers\MasterItemsController::class, 'exportExcel']);
 
 Route::get('/master-items/update-random-data', [App\Http\Controllers\MasterItemsController::class, 'updateRandomData']);
